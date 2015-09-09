@@ -1,0 +1,27 @@
+#!/sbin/runscript
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License, v2 or later
+
+depend() {
+    need localmount
+    after bootmisc
+}
+
+extra_commands="reset"
+command="/usr/libexec/rtirq.sh"
+
+start() {
+    ${command} start 
+}
+
+stop() {
+    ${command} stop 
+}
+
+reset() {
+    ${command} reset 
+}
+
+status() {
+    ${command} status 
+}
