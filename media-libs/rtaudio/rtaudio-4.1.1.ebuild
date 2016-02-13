@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils autotools toolchain-funcs
 
 DESCRIPTION="A set of cross-platform C++ classes for realtime audio I/O"
-HOMEPAGE="http://www.music.mcgill.ca/~gary/rtaudio/"
+HOMEPAGE="http://www.music.mcgill.ca/~gary/rtaudio/ https://github.com/thestk/rtaudio"
 SRC_URI="http://www.music.mcgill.ca/~gary/${PN}/release/${P}.tar.gz"
 
 LICENSE="MIT"
