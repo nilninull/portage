@@ -14,7 +14,7 @@ SRC_URI="http://www.rncbc.org/archive/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
-IUSE="openrc"
+IUSE="+openrc"
 
 DEPEND=">=sys-apps/util-linux-2.13
 	sys-apps/sysvinit
