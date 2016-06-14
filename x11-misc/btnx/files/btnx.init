@@ -1,0 +1,28 @@
+#!/sbin/openrc-run
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License, v2 or later
+# $Id$
+
+command="/usr/libexec/btnx"
+
+depend() {
+    need localmount
+}
+
+start() {
+    ebegin "Starting btnx"
+    ${command} start
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping btnx"
+    ${command} reset
+    eend $?
+}
+
+restart() {
+    ebegin "Restart btnx"
+    ${command} restart
+    eend $?
+}
