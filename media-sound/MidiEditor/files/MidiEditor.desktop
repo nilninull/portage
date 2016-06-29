@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=MidiEditor
+Version=1.0
+GenericName=MidiEditor
+Exec=/usr/bin/MidiEditor
+Icon=midieditor.png
+Categories=AudioVideo;Audio;
+Terminal=false
+Type=Application
