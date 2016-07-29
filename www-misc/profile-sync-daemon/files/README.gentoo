@@ -28,3 +28,16 @@ This package installs /etc/sudoers.d/psd file with below contents
 --- END ---
 
 psd users must belong users group or modify the file's first entry.
+
+* setup steps
+ 1. edit /etc/conf.d/psd
+ 2. epsd p
+ 3. edit ~/.config/psd/psd.conf
+ 4. cd /etc/init.d
+ 5. sudo ln -s psd psd.$USER
+ 6. sudo rc-update add psd.$USER default
+ 7. edit /etc/cron.d/psd (optionally, for change interval)
+ 8. edit /etc/sudoers.d/psd (optionally, needed by overlayfs)
+ 9. sudo rc-service psd.$USER start
+
+ 
