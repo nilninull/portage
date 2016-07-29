@@ -1,0 +1,30 @@
+profile-sync-daemon and psd (it's a symbolic link) commands need
+XDG_RUNTIME_DIR variable, but openrc is not set the variable.
+
+Becase of this, openrc user has to specify the RUNTIME_DIR variable in
+/etc/conf.d/psd.
+
+And if you want to use profile-sync-daemon command directly, you must
+set XDG_RUNTIME_DIR variable with same value of config's
+RUNTIME_DIR. For this situation, there is a simple wrapper command
+named epsd. This command reads the variable from /etc/conf.d/psd file.
+
+And also, profile-sync-daemon needs resync call periodically. But
+openrc has no timer event systems. My simple solution is calling by
+cron. So, you can change the interval by editing /etc/cron.d/psd file.
+This interval shares all psd users. If you want to set the value to
+each users, you can edit the user's crontab by crontab -e.
+
+Example
+   */4 * * * * /usr/bin/epsd resync
+
+
+* for overlayfs users
+The users using overlayfs need to have sudo right to /usr/bin/psd-overlay-helper.
+This package installs /etc/sudoers.d/psd file with below contents
+
+--- BEGIN ---
+%users ALL=(ALL) NOPASSWD: /usr/bin/psd-overlay-helper
+--- END ---
+
+psd users must belong users group or modify the file's first entry.

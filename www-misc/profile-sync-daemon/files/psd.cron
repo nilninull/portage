@@ -1,0 +1,4 @@
+0 * * * * root /usr/libexec/psd-sync
+# examples for fcron users
+# %hourly /usr/libexec/psd-sync
+# %midhourly /usr/libexec/psd-sync
