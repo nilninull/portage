@@ -12,7 +12,7 @@ SRC_URI="https://github.com/graysky2/profile-sync-daemon/archive/v${PV}.tar.gz -
 LICENSE="GPL-2 GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="openrc systemd +overlayfs"
+IUSE="openrc systemd +overlayfs aux"
 
 REQUIRED_USE="|| ( openrc systemd )"
 
@@ -56,6 +56,11 @@ src_install() {
 		newbin ${FILESDIR}/psd-wrapper.sh epsd
 
 		readme.gentoo_create_doc
+	fi
+
+	if use aux; then
+		insinto /usr/share/psd/browsers
+		doins ${FILESDIR}/{quiterss,home-cache}
 	fi
 }
 
