@@ -1,0 +1,34 @@
+#!/sbin/openrc-run
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+description="manage user defined dirs in tmpfs and to periodically sync"
+extra_commands="resync"
+description_resync="Synchronize the tmpfs and media bound copy."
+
+pidfile="/var/run/asd.pid"
+
+depend() {
+    need devfs localmount
+    after swapfiles
+}
+
+start() {
+    ebegin "Starting Anything Sync Daemon"
+    start-stop-daemon /usr/bin/anything-sync-daemon sync 
+    eend $?
+}
+
+stop() {
+    ebegin "Stop Anything Sync Daemon"
+    start-stop-daemon /usr/bin/anything-sync-daemon unsync 
+    eend $?
+}
+
+resync() {
+    ebegin "Doing a user-requested Sync"
+    start-stop-daemon /usr/bin/anything-sync-daemon resync
+    eend $?
+}
+
