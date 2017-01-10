@@ -31,7 +31,7 @@ DEPEND="
 	dev-qt/qtgui:5
 	pythonqt? ( >=dev-lang/python-3.4 )
 	help? ( app-doc/csound-manual )
-	graph ( media-gfx/graphviz )
+	graph? ( media-gfx/graphviz )
 "
 
 S=${WORKDIR}/CsoundQt-${PV}
