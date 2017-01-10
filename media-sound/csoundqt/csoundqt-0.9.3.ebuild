@@ -24,12 +24,14 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
-IUSE="double-precision rtmidi pythonqt record debugger"
+IUSE="double-precision rtmidi pythonqt record debugger help graph"
 # html5
 DEPEND="
 	media-sound/csound[double-precision=]
 	dev-qt/qtgui:5
 	pythonqt? ( >=dev-lang/python-3.4 )
+	help? ( app-doc/csound-manual )
+	graph ( media-gfx/graphviz )
 "
 
 S=${WORKDIR}/CsoundQt-${PV}
