@@ -27,7 +27,8 @@ fi
 SLOT="0"
 LICENSE="GPL-2"
 
-IUSE="avahi +capture debug faust ladspa lv2 +meterbridge nls roboto-font +optimization online-preset"
+IUSE="avahi +capture debug faust ladspa lv2 +meterbridge nls system-roboto-font roboto-font +optimization online-preset"
+REQUIRED_USE="^^ ( system-roboto-font roboto-font )"
 
 RDEPEND="dev-cpp/eigen:3
 	dev-cpp/glibmm:2
@@ -47,6 +48,7 @@ RDEPEND="dev-cpp/eigen:3
 	avahi? ( net-dns/avahi )
 	faust? ( || ( =dev-lang/faust-0.9.58 =dev-lang/faust-0.9.65 ) )
 	ladspa? ( media-libs/ladspa-sdk <=dev-libs/boost-1.62.0 )
+	system-roboto-font? ( media-fonts/roboto )
 	lv2? ( || ( media-libs/lv2core media-libs/lv2 ) )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -73,7 +75,7 @@ src_configure() {
 		$(usex faust --faust --no-faust)
 		$(usex ladspa --ladspadir="${EPREFIX}"/usr/share/ladspa "--no-ladspa --no-new-ladspa")
 		$(usex lv2 --lv2dir="${EPREFIX}"/usr/$(get_libdir)/lv2 --no-lv2)
-		$(usex roboto-font --install-roboto-font)
+		$(usex roboto-font --install-roboto-font "")
 	)
 
 	waf-utils_src_configure ${mywafconfargs[@]}
