@@ -1,0 +1,30 @@
+diff -u -ru profile-sync-daemon-6.31.orig/common/profile-sync-daemon.in profile-sync-daemon-6.31/common/profile-sync-daemon.in
+--- profile-sync-daemon-6.31.orig/common/profile-sync-daemon.in	2017-03-02 16:24:49.857477228 +0900
++++ profile-sync-daemon-6.31/common/profile-sync-daemon.in	2017-03-02 16:26:13.984469311 +0900
+@@ -310,7 +310,7 @@
+     load_env_for "$browser"
+     for item in "${DIRArr[@]}"; do
+       DIR="$item"
+-      CRASHArr=( $(find "${DIR%/*}" -type d -name '*crashrecovery*'|sort -r) )
++      CRASHArr=( $(find "${DIR%/*}" -maxdepth 1 -type d -name '*crashrecovery*'|sort -r) )
+       if [[ ${#CRASHArr[@]} -gt 0 ]]; then
+         echo -e "${BLD}Deleting ${#CRASHArr[@]} crashrecovery dir(s) for profile ${BLU}$DIR${NRM}"
+         for backup in "${CRASHArr[@]}"; do
+@@ -526,7 +526,7 @@
+ enforce() {
+   local browser
+   for browser in "${BROWSERS[@]}"; do
+-    CRASHArr=( $(find "${DIR%/*}" -type d -name '*crashrecovery*'|sort -r) )
++    CRASHArr=( $(find "${DIR%/*}" -maxdepth 1 -type d -name '*crashrecovery*'|sort -r) )
+     if [[ ${#CRASHArr[@]} -gt $BACKUP_LIMIT ]]; then
+       for remove in "${CRASHArr[@]:$BACKUP_LIMIT}"; do
+         rm -rf "$remove"
+@@ -603,7 +603,7 @@
+       fi
+       UPPER="$VOLATILE/$user-$browser${suffix}-rw"
+       if [[ -d "$DIR" ]]; then
+-        CRASHArr=( $(find "${DIR%/*}" -type d -name '*crashrecovery*'|sort -r) )
++        CRASHArr=( $(find "${DIR%/*}" -maxdepth 1 -type d -name '*crashrecovery*'|sort -r) )
+         # get permissions on profile dir and be smart about it since symlinks are all 777
+         [[ -f $PID_FILE ]] && TRUEP=$(stat -c %a "$BACKUP") || TRUEP=$(stat -c %a "$DIR")
+         # since $XDG_RUNTIME_DIR is 700 by default so pass on by
