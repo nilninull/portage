@@ -1,0 +1,102 @@
+From 833693319de89bf298d4e52f9bbe2dd5726096e2 Mon Sep 17 00:00:00 2001
+From: nilninull <nilninull@gmail.com>
+Date: Wed, 21 Jun 2017 12:15:02 +0900
+Subject: [PATCH] changes to pic
+
+---
+ Makefile.am       |  6 +++---
+ gsm/Makefile.am   |  4 ++--
+ gverb/Makefile.am |  4 ++--
+ util/Makefile.am  | 22 +++++++++++-----------
+ 4 files changed, 18 insertions(+), 18 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 146d0fa..096277d 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -61,11 +61,11 @@ mbeq_1197_la_SOURCES = mbeq_1197.c
+ imp_1199_la_LIBADD = $(FFTW_LIBS)
+ imp_1199_la_CFLAGS = $(FFTW_CFLAGS)
+ imp_1199_la_DEPENDENCIES = @top_srcdir@/impulses/*
+-hermes_filter_1200_la_DEPENDENCIES = util/libblo.a
++hermes_filter_1200_la_DEPENDENCIES = util/libblo.la
+ hermes_filter_1200_la_LIBADD = -Lutil -lblo
+-fm_osc_1415_la_DEPENDENCIES = util/libblo.a
++fm_osc_1415_la_DEPENDENCIES = util/libblo.la
+ fm_osc_1415_la_LIBADD = -Lutil -lblo
+-analogue_osc_1416_la_DEPENDENCIES = util/libblo.a
++analogue_osc_1416_la_DEPENDENCIES = util/libblo.la
+ analogue_osc_1416_la_LIBADD = -Lutil -lblo
+ sc1_1425_la_LIBADD = -Lutil -ldb -lrms
+ sc2_1426_la_LIBADD = -Lutil -ldb -lrms
+diff --git a/gsm/Makefile.am b/gsm/Makefile.am
+index fa19233..3f88eec 100644
+--- a/gsm/Makefile.am
++++ b/gsm/Makefile.am
+@@ -2,12 +2,12 @@ LIBTOOL=libtool
+ RANLIB=ranlib
+ 
+ noinst_HEADERS = gsm.h config.h private.h proto.h unproto.h
+-noinst_LIBRARIES = libgsm.a
++noinst_LTLIBRARIES = libgsm.la
+ 
+ CFILES = add.c decode.c gsm_decode.c gsm_encode.c long_term.c preprocess.c \
+ 	short_term.c code.c gsm_create.c gsm_destroy.c gsm_option.c lpc.c rpe.c table.c
+ 
+-libgsm_a_SOURCES = $(CFILES) $(noinst_HEADERS)
++libgsm_la_SOURCES = $(CFILES) $(noinst_HEADERS)
+ 
+ # Disable autoheader. 
+ AUTOHEADER=echo
+diff --git a/gverb/Makefile.am b/gverb/Makefile.am
+index 1620f2c..69d8f4a 100644
+--- a/gverb/Makefile.am
++++ b/gverb/Makefile.am
+@@ -3,9 +3,9 @@ RANLIB=ranlib
+ 
+ noinst_HEADERS = gverb.h gverbdsp.h
+ 
+-noinst_LIBRARIES = libgverb.a
++noinst_LTLIBRARIES = libgverb.la
+ 
+-libgverb_a_SOURCES = gverb.c gverbdsp.c
++libgverb_la_SOURCES = gverb.c gverbdsp.c
+ 
+ # Disable autoheader. 
+ AUTOHEADER=echo
+diff --git a/util/Makefile.am b/util/Makefile.am
+index e88df3c..6b30c21 100644
+--- a/util/Makefile.am
++++ b/util/Makefile.am
+@@ -3,17 +3,17 @@ RANLIB=ranlib
+ 
+ noinst_HEADERS = rms.h db.h blo.h pitchscale.h waveguide_nl.h biquad.h iir.h buffer.h ls_filter.h
+ 
+-noinst_LIBRARIES = librms.a libdb.a libblo.a libpitchscale.a libiir.a
++noinst_LTLIBRARIES = librms.la libdb.la libblo.la libpitchscale.la libiir.la
+ 
+-librms_a_SOURCES = rms.c
+-libdb_a_SOURCES = db.c
+-libblo_a_SOURCES = blo.c
+-libblo_a_CFLAGS = -I@top_srcdir@
+-libpitchscale_a_SOURCES = pitchscale.c
+-libpitchscale_a_CFLAGS = $(FFTW_CFLAGS)
+-#libpitchscale_a_LIBS = $(FFTW_LIBS)
+-libiir_a_SOURCES = iir.c
+-libiir_a_CPPFLAGS = -I@top_srcdir@
+-#libbuffer_a_SOURCES = buffer.c
++librms_la_SOURCES = rms.c
++libdb_la_SOURCES = db.c
++libblo_la_SOURCES = blo.c
++libblo_la_CFLAGS = -I@top_srcdir@
++libpitchscale_la_SOURCES = pitchscale.c
++libpitchscale_la_CFLAGS = $(FFTW_CFLAGS)
++#libpitchscale_la_LIBS = $(FFTW_LIBS)
++libiir_la_SOURCES = iir.c
++libiir_la_CPPFLAGS = -I@top_srcdir@
++#libbuffer_la_SOURCES = buffer.c
+ # Disable autoheader. 
+ AUTOHEADER=echo
+-- 
+2.13.0
+

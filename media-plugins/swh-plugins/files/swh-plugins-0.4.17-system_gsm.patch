@@ -1,0 +1,61 @@
+From c6b40f8faf055735b414b99e1e99e60e44fd2903 Mon Sep 17 00:00:00 2001
+From: nilninull <nilninull@gmail.com>
+Date: Wed, 21 Jun 2017 12:02:46 +0900
+Subject: [PATCH 1/2] switch gsm to system's
+
+---
+ Makefile.am  | 4 ++--
+ configure.ac | 6 ++++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index c548a08..146d0fa 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -34,7 +34,7 @@ plugin_LTLIBRARIES = \
+ 	latency_1914.la xfade_1915.la sc4m_1916.la \
+ 	mbeq_1197.la pitch_scale_1193.la pitch_scale_1194.la imp_1199.la
+ 
+-SUBDIRS = po util gsm gverb metadata
++SUBDIRS = po util gverb metadata
+ 
+ # Wacky stuff to stop automake getting confused
+ EXTRA_DIST = config.rpath  @top_srcdir@/*.xml @top_srcdir@/*.c @top_srcdir@/*.h \
+@@ -73,7 +73,7 @@ sc3_1427_la_LIBADD = -Lutil -ldb -lrms
+ sc4_1882_la_LIBADD = -Lutil -ldb -lrms
+ sc4m_1916_la_LIBADD = -Lutil -ldb -lrms
+ se4_1883_la_LIBADD = -Lutil -ldb -lrms
+-gsm_1215_la_LIBADD = gsm/libgsm.a
++gsm_1215_la_LIBADD = @GSM_LIBS@
+ gverb_1216_la_LIBADD = -Lgverb -lgverb
+ lcr_delay_1436_la_DEPENDENCIES = util/biquad.h
+ 
+diff --git a/configure.ac b/configure.ac
+index ffe847e..46ae22a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -145,17 +145,19 @@ else
+   AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${datadir}/${PACKAGE}")
+ fi
+ 
+-subdirs="util gsm gverb metadata"
++GSM_LIBS=-lgsm
++
++subdirs="util gverb metadata"
+ 
+ AC_SUBST(subdirs)
+ AC_SUBST(FFTW_LIBS)
+ AC_SUBST(STATIC_FFTW_LIBS)
+ AC_SUBST(FFTW_CFLAGS)
++AC_SUBST(GSM_LIBS)
+ AC_SUBST(LIBTOOL)
+ AC_OUTPUT([
+ Makefile
+ util/Makefile
+-gsm/Makefile
+ gverb/Makefile
+ metadata/Makefile
+ po/Makefile.in
+-- 
+2.13.0
+
