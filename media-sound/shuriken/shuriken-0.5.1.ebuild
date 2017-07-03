@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -31,6 +31,9 @@ QT_SELECT=qt4
 
 src_prepare() {
 	sed -e 's/qmake-qt4/qmake/' -i build
+	if [ `gcc --version | sed -n '1{s/^.* //;s/\..*$//p}'` -ge 6 ]; then
+		sed -e 's/static const/static constexpr/' -i src/waveformitem.h src/audioanalyser.h
+	fi
 	default
 }
 
