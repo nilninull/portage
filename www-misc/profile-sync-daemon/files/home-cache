@@ -1,2 +1,2 @@
-DIRArr[0]="$homedir/.cache"
-PSNAME="$browser"
+DIRArr=( $( echo $HOME/.cache/* | tr ' ' '\n' | grep -v -- -backup | grep -v -- -ovfs ) )
+check_suffix=1
