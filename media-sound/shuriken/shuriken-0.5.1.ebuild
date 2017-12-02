@@ -14,7 +14,7 @@ RESTRICT="mirror"
 
 DEPEND=">=media-libs/alsa-lib-1.0.18
 	>=media-libs/aubio-0.4.1
-	>=media-sound/jack-audio-connection-kit-0.118
+	virtual/jack
 	>=media-libs/liblo-0.26
 	dev-qt/qtopengl:4
 	dev-qt/qtcore:4

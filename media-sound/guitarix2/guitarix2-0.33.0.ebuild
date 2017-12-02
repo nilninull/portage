@@ -27,7 +27,7 @@ RDEPEND="
 	dev-libs/glib
 	media-libs/liblrdf
 	>=media-libs/libsndfile-1.0.17
-	>=media-sound/jack-audio-connection-kit-0.109.1
+	virtual/jack
 	media-sound/lame
 	media-sound/vorbis-tools
 	>=sci-libs/fftw-3.1.2

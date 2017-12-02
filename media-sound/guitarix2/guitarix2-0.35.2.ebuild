@@ -40,7 +40,7 @@ RDEPEND="dev-cpp/eigen:3
 	media-libs/lilv:0
 	media-libs/zita-convolver
 	media-libs/zita-resampler
-	|| ( media-sound/jack-audio-connection-kit virtual/jack )
+	virtual/jack
 	media-sound/lame
 	sci-libs/fftw:3.0
 	x11-libs/gtk+:2
