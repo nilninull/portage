@@ -17,7 +17,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 DEPEND="dev-qt/qtgui:5
 	media-libs/alsa-lib
-	media-sound/jack-audio-connection-kit
+	virtual/jack
 	media-libs/portaudio
 	media-libs/rtmidi
 	media-libs/stk

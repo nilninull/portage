@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 
 IUSE=""
-DEPEND="media-sound/jack-audio-connection-kit
+DEPEND="virtual/jack
 	x11-libs/cairo
 	media-libs/liblo
 	media-libs/libsndfile

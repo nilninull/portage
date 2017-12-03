@@ -15,7 +15,7 @@ KEYWORDS="~x86"
 
 IUSE="alsa jack lv2 magic osc pulseaudio fftw zlib opengl ntk projectm qt4 qt5 gtk2 gtk3"
 DEPEND="|| ( dev-python/PyQt4 dev-python/PyQt5 )
-	jack?		( media-sound/jack-audio-connection-kit )
+	jack?		( virtual/jack )
 	alsa?		( media-libs/alsa-lib )
 	lv2?		( media-libs/lv2 )
 	magic?		( sys-apps/file )

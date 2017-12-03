@@ -16,7 +16,7 @@ IUSE="+alsa doc jack pulseaudio static-libs"
 REQUIRED_USE="|| ( alsa jack pulseaudio )"
 
 RDEPEND="alsa? ( media-libs/alsa-lib )
-	jack? ( media-sound/jack-audio-connection-kit )
+	jack? ( virtual/jack )
 	pulseaudio? ( media-sound/pulseaudio )"
 DEPEND="${RDEPEND}"
 
