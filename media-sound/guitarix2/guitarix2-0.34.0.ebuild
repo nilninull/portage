@@ -15,7 +15,7 @@ HOMEPAGE="http://guitarix.sourceforge.net/"
 
 RESTRICT="mirror"
 if [ "${PV}" = "9999" ]; then
-	EGIT_REPO_URI="git://git.code.sf.net/p/guitarix/git/"
+	EGIT_REPO_URI="https://git.code.sf.net/p/guitarix/git/"
 	S="${S}/trunk"
 	KEYWORDS=""
 else
