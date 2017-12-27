@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
-inherit autotools eutils multilib
+inherit autotools eutils
 
 DESCRIPTION="RtMidi provide a common C++ API for realtime MIDI input/output across ALSA and JACK."
 HOMEPAGE="http://www.music.mcgill.ca/~gary/rtmidi/ https://github.com/thestk/rtmidi"
@@ -19,26 +19,19 @@ RDEPEND="alsa? ( media-libs/alsa-lib )
 
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	eautoreconf
-}
+HTML_DOCS=doc/html
+DOCS=( README.md doc/release.txt )
 
 src_configure() {
-	econf --libdir="/usr/$(get_libdir)" \
-	$(use_with alsa) \
-	$(use_with jack) || die "./configure failed"
+	econf --libdir="/usr/$(get_libdir)"			\
+	$(use_with alsa)							\
+	$(use_with jack)
 }
 
 src_compile() {
-	emake -j1 || die "make failed"
+	emake -j1
 }
 
 src_install() {
-	dodoc readme
-	if use doc; then
-		dodoc doc/release.txt
-		dohtml doc/html/*
-	fi
-
 	emake DESTDIR=${D} install
 }
