@@ -3,14 +3,16 @@
 
 EAPI=6
 
-inherit qmake-utils multilib
+PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
+
+inherit qmake-utils multilib python-single-r1
 
 MYPY_PN="PythonQt"
-MYPY_PV="3.1"
+MYPY_PV="3.2"
 MYPY_P="${MYPY_PN}${MYPY_PV}"
 
 MYRTMD_PN='rtmidi'
-MYRTMD_PV='2.1.1'
+MYRTMD_PV='3.0.0'
 MYRTMD_P="${MYRTMD_PN}-${MYRTMD_PV}"
 
 DESCRIPTION="an IDE for Csound featuring a highlighting editor with autocomplete, interactive widgets, pythonqt scripting and integrated help."
@@ -26,14 +28,27 @@ KEYWORDS="~x86 ~amd64"
 
 IUSE="double-precision rtmidi pythonqt record debugger manual graph"
 # html5
-DEPEND="media-sound/csound[double-precision=]
+DEPEND="${PYTHON_DEPS}
+	media-sound/csound[double-precision=]
 	dev-qt/qtgui:5"
 RDEPEND="${DEPEND}
-	pythonqt? ( dev-python/PythonQt )
+	pythonqt? ( ~dev-python/PythonQt-${MYPY_PV}[${PYTHON_USEDEP}] )
 	manual? ( || ( >=media-sound/csound-6.09.1[doc] app-doc/csound-manual[html] ) )
 	graph? ( media-gfx/graphviz )"
 
 S=${WORKDIR}/CsoundQt-${PV}
+
+src_prepare() {
+	if use pythonqt; then
+		pushd ${WORKDIR}/${MYPY_P}
+		sed -i "/unix:PYTHON_VERSION=/s/2.7//" build/python.prf \
+			|| die "sed for python version"
+		popd
+	fi
+
+	sed -e '/^PYTHONQT_VARIANTS = /s/= /= "PythonQt3.2"/' -i qcs-unix.pro
+	default
+}
 
 src_configure() {
 	local config_opts="INSTALL_DIR=/usr CSOUND_LIBRARY_DIRS=$(get_libdir)"
