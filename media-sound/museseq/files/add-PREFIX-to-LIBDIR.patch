@@ -1,0 +1,14 @@
+-- a/muse3/CMakeLists.txt
++++ b/muse3/CMakeLists.txt
+@@ -54,7 +54,7 @@ include_directories(${VST_HEADER_PATH})
+ # set libdir if not use -DLIB_INSTALL_DIR
+ if (NOT LIB_INSTALL_DIR)
+         if(CMAKE_INSTALL_LIBDIR)
+-                SET(LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR})
++                SET(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+         else(CMAKE_INSTALL_LIBDIR)
+                 SET(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}")
+         endif(CMAKE_INSTALL_LIBDIR)
+-- 
+2.13.6
+
