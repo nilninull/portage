@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
+# PYTHON_COMPAT=( python2_7 )
 inherit cmake-utils toolchain-funcs flag-o-matic versionator gnome2-utils xdg-utils
+# python-single-r1
+
 
 MY_PV=$(replace_all_version_separators _ ${PV})
 
