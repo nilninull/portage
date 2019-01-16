@@ -1,8 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit multilib
 
 ROBTK_VER=0.5.3
 
@@ -33,8 +32,9 @@ src_prepare() {
 	default
 	rmdir robtk
 	mv ${WORKDIR}/robtk-${ROBTK_VER} robtk
+	sed -i 's/pow10/exp10/' -i gui/phasewheel.c
 }
 
 src_install() {
-	emake DESTDIR="${D}" PREFIX="/usr" LIBDIR="$(get_libdir)" install
+	emake DESTDIR="${D}" PREFIX="${EPREFIX}/usr" LIBDIR="$(get_libdir)" LV2DIR="/usr/$(get_libdir)/lv2" install
 }

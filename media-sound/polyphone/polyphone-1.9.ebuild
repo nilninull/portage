@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -29,6 +29,12 @@ S=${WORKDIR}/trunk
 pkg_nofetch() {
 	einfo Please download polyphone-${PV}-src.zip from
 	einfo https://polyphone-soundfonts.com/en/download
+}
+
+src_prepare() {
+	sed '/#include <QFileInfo>/ i\
+#include <QAction>' -i configuration/config.cpp
+	default
 }
 
 src_configure() {

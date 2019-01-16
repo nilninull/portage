@@ -1,27 +1,42 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit qt4-r2 subversion
+EAPI=6
+
+inherit git-r3
 
 DESCRIPTION="a free software providing an interface to edit, record, and play Midi data."
-HOMEPAGE="http://midieditor.sourceforge.net"
-SRC_URI=""
+HOMEPAGE="https://www.midieditor.org"
+EGIT_REPO_URI="https://github.com/markusschwenk/midieditor.git"
 
-ESVN_REPO_URI="svn://svn.code.sf.net/p/midieditor/code/trunk"
-# ESVN_REVISION=
-
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 
 IUSE=""
-DEPEND="media-libs/libsfml
-	dev-qt/qtgui:4
-	dev-qt/qtcore:4
+DEPEND="dev-qt/qtgui:5
+	dev-qt/qtcore:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtmultimedia:5
+	dev-qt/qtxml:5
+	dev-qt/assistant:5
 	virtual/jack
-	media-libs/alsa-lib"
+	media-libs/alsa-lib
+	dev-qt/qtwidgets:5
+	dev-qt/qtmultimedia:5
+	media-sound/pulseaudio
+	media-libs/flac
+	media-libs/libogg
+	media-libs/libvorbis
+"
 RDEPEND="${DEPEND}"
+
+DOCS=( packaging/unix/midieditor/copyright )
+
+src_configure() {
+	default
+	qmake
+}
 
 src_install() {
 	cat <<EOF > midieditor
@@ -34,12 +49,23 @@ EOF
 	exeinto /usr/libexec
 	doexe MidiEditor
 
+	sed -e '/^Icon/s/\.png$//' -e '/^Version/s/=.*$/=1.0/' \
+		-i packaging/unix/midieditor/MidiEditor.desktop
+
 	insinto /usr/share/applications
-	doins ${FILESDIR}/MidiEditor.desktop
+	doins packaging/unix/midieditor/MidiEditor.desktop
+
+	insinto /usr/share/pixmaps
+	newins packaging/unix/midieditor/logo48.png midieditor.png
 
 	insinto /usr/share/midieditor
 	doins -r run_environment/*
 
-	insinto /usr/share/pixmaps
-	doins run_environment/graphics/midieditor.png
+	insinto /usr/share/midieditor/assistant
+	doins -r midieditor-manual/* packaging/manual/*
+
+	# Create manual
+	cd ${D}/usr/share/midieditor/assistant
+	qcollectiongenerator midieditor-collection.qhcp -o midieditor-collection.qhc
+	cd -
 }

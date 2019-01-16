@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -20,3 +20,7 @@ KEYWORDS="~x86 ~amd64"
 DEPEND="media-libs/lv2
 	media-libs/libbs2b"
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	waf-utils_src_configure --lv2dir=${EPREFIX}/usr/$(get_libdir)/lv2
+}
