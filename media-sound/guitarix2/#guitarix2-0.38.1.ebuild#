@@ -45,7 +45,7 @@ RDEPEND="dev-cpp/eigen:3
 	sci-libs/fftw:3.0
 	x11-libs/gtk+:2
 	avahi? ( net-dns/avahi )
-	faust? ( =dev-lang/faust-2.15.11 =dev-libs/faustlibraries-2019.04.09 )
+	faust? ( =dev-lang/faust-2.15.11 )
 	ladspa? ( media-libs/ladspa-sdk dev-libs/boost )
 	system-roboto-font? ( media-fonts/roboto )
 	lv2? ( || ( media-libs/lv2core media-libs/lv2 ) )"
@@ -63,7 +63,7 @@ DOCS=( changelog README )
 
 src_configure() {
 	local mywafconfargs=(
-		--cxxflags-debug=""
+	--cxxflags-debug=""
 		--cxxflags-release="-DNDEBUG"
 		--nocache
 		--shared-lib
