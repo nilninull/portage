@@ -9,6 +9,7 @@ DESCRIPTION="Polyphonic version of Xmonk.lv2"
 HOMEPAGE="https://github.com/brummer10/XPolyMonk.lv2"
 # SRC_URI="https://github.com/brummer10/XPolyMonk.lv2/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 EGIT_REPO_URI="https://github.com/brummer10/XPolyMonk.lv2.git"
+EGIT_COMMIT=v${PV}
 
 LICENSE="BSD0"
 SLOT="0"
