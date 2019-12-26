@@ -17,6 +17,7 @@ KEYWORDS="~amd64"
 RESTRICT="mirror"
 
 RDEPEND="
+	x11-libs/libX11
 	x11-libs/cairo
 	media-libs/lv2
 "
