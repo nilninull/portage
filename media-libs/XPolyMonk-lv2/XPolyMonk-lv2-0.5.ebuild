@@ -28,5 +28,5 @@ DEPEND="${RDEPEND}"
 src_install() {
 	insinto /usr/$(get_libdir)/lv2
 	doins -r XPolyMonk/XPolyMonk.lv2
-	dodoc Makefile  README.md
+	dodoc LICENSE README.md
 }
