@@ -7,7 +7,7 @@ inherit qmake-utils xdg
 
 DESCRIPTION="Qt graphical user interface to the liquidsfz library"
 HOMEPAGE="https://github.com/be1/qliquidsfz"
-SRC_URI="https://github.com/be1/qliquidsfz/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/be1/qliquidsfz/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
