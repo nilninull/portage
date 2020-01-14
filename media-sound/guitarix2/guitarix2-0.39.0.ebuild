@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -45,7 +45,7 @@ RDEPEND="dev-cpp/eigen:3
 	sci-libs/fftw:3.0
 	x11-libs/gtk+:2
 	avahi? ( net-dns/avahi )
-	faust? ( =dev-lang/faust-0.9.90 )
+	faust? ( =dev-lang/faust-2.15.11 =dev-libs/faustlibraries-2019.04.09 )
 	ladspa? ( media-libs/ladspa-sdk dev-libs/boost )
 	system-roboto-font? ( media-fonts/roboto )
 	lv2? ( || ( media-libs/lv2core media-libs/lv2 ) )"
@@ -58,11 +58,13 @@ RDEPEND="${RDEPEND}
 
 DOCS=( changelog README )
 
+# CC="clang"
+# CXX="clang++"
+
 src_configure() {
 	local mywafconfargs=(
 		--cxxflags-debug=""
 		--cxxflags-release="-DNDEBUG"
-		--nocache
 		--shared-lib
 
 		--no-ldconfig
@@ -75,7 +77,11 @@ src_configure() {
 		$(usex ladspa --ladspadir="${EPREFIX}"/usr/share/ladspa "--no-ladspa --no-new-ladspa")
 		$(usex lv2 --lv2dir="${EPREFIX}"/usr/$(get_libdir)/lv2 --no-lv2)
 		$(usex roboto-font --install-roboto-font "")
+
+		--faust-float
 	)
+		# --faust-vectorize-float
+		# --faust-vectorize
 
 	waf-utils_src_configure ${mywafconfargs[@]}
 }
