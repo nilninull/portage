@@ -13,7 +13,7 @@ KEYWORDS="~amd64"
 RESTRICT="mirror"
 
 RDEPEND="
-	sci-libs/fftw:3
+	sci-libs/fftw:3.0
 	media-libs/libsndfile
 	dev-libs/libgcrypt
 	media-libs/zita-resampler
