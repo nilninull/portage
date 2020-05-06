@@ -33,7 +33,7 @@ REQUIRED_USE="^^ ( system-roboto-font roboto-font )"
 RDEPEND="dev-cpp/eigen:3
 	dev-cpp/glibmm:2
 	dev-cpp/gtkmm:2.4
-	dev-libs/boost
+	dev-libs/boost:=
 	dev-libs/glib
 	media-libs/liblrdf
 	media-libs/libsndfile
