@@ -1,8 +1,0 @@
-# DIRArr=( $( echo $HOME/.cache/* | tr ' ' '\n' | grep -v -- -backup | grep -v -- -ovfs ) )
-DIRArr=()
-for fn in $HOME/.cache/*; do
-    if [[ -d $fn && $fn != *-ovfs && $fn != *-backup && $fn != *-backup-crashrecovery-* ]]; then
-        DIRArr+=( $fn )
-    fi
-done
-check_suffix=1
