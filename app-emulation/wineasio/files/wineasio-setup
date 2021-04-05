@@ -1,0 +1,50 @@
+#! /bin/bash
+
+DLL_FILE=wineasio.dll.so
+
+make_wineasio_link() {
+    local BIT=$1
+    local WVER=$2
+
+    if [[ -d /usr/lib${BIT}/${WVER}/wine/ ]]; then
+	ln -snf /usr/lib${BIT}/wineasio/${DLL_FILE} /usr/lib${BIT}/${WVER}/wine/
+    fi
+}
+
+make_links() {
+    for wver in $(eselect --brief wine list); do
+	make_wineasio_link 64 ${wver}
+	make_wineasio_link '' ${wver}
+    done
+}
+
+remove_links() {
+    shopt -s  nullglob
+
+    for dll_file in /usr/lib{,64}/wine-*/wine/${DLL_FILE}; do
+	rm -f ${dll_file}
+    done
+}
+
+show_links() {
+    shopt -s  nullglob
+
+    for lnk in /usr/lib{,64}/wine-*/wine/${DLL_FILE}; do
+	ls -l $lnk
+    done
+}
+
+if [[ x$1 == x-l ]]; then
+    make_links
+elif [[ x$1 == x-r ]]; then
+    remove_links
+elif [[ x$1 == x-s ]]; then
+    show_links
+else
+    cat <<-EOF
+	$(basename ${0}) [-l|-r|-s]
+	-l : make links to wineasio dll
+	-r : remove links of wineasio dll
+	-s : show links
+EOF
+fi
