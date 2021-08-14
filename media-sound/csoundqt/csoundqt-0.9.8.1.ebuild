@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
+PYTHON_COMPAT=( python3_{6,7,8,9,10} )
 
 inherit qmake-utils multilib python-single-r1
 
@@ -12,12 +12,12 @@ MYPY_PV="3.2"
 MYPY_P="${MYPY_PN}${MYPY_PV}"
 
 MYRTMD_PN='rtmidi'
-MYRTMD_PV='3.0.0'
+MYRTMD_PV='4.0.0'
 MYRTMD_P="${MYRTMD_PN}-${MYRTMD_PV}"
 
 DESCRIPTION="an IDE for Csound featuring a highlighting editor with autocomplete, interactive widgets, pythonqt scripting and integrated help."
 HOMEPAGE="http://csoundqt.github.io/"
-SRC_URI="https://github.com/CsoundQt/CsoundQt/archive/${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/CsoundQt/CsoundQt/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
    pythonqt? ( mirror://sourceforge/pythonqt/pythonqt/${MYPY_PN}-${MYPY_PV}/${MYPY_P}.zip )
    rtmidi? ( http://www.music.mcgill.ca/~gary/rtmidi/release/${MYRTMD_P}.tar.gz )
 "
@@ -32,7 +32,7 @@ DEPEND="${PYTHON_DEPS}
 	media-sound/csound[double-precision=]
 	dev-qt/qtgui:5"
 RDEPEND="${DEPEND}
-	pythonqt? ( ~dev-python/PythonQt-${MYPY_PV}[${PYTHON_USEDEP}] )
+	pythonqt? ( $(python_gen_cond_dep ~dev-python/PythonQt-${MYPY_PV}'[${PYTHON_MULTI_USEDEP}]') )
 	manual? ( || ( >=media-sound/csound-6.09.1[doc] app-doc/csound-manual[html] ) )
 	graph? ( media-gfx/graphviz )"
 
@@ -67,6 +67,8 @@ src_configure() {
 	else
 		config_opts+=' CONFIG+=build32'
 	fi
+
+	config_opts+=" DEFAULT_CSOUND_LIBRARY_DIRS+=/usr/$(get_libdir)"
 
 	use rtmidi && config_opts+=" CONFIG+=rtmidi RTMIDI_DIR=../${MYRTMD_P}"
 

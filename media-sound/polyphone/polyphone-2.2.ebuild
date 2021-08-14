@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit qmake-utils
 
@@ -31,6 +31,15 @@ S=${WORKDIR}/sources
 pkg_nofetch() {
 	einfo Please download polyphone-${PV}.zip from
 	einfo https://polyphone-soundfonts.com/en/download
+}
+
+src_prepare() {
+	default
+
+	sed -e '
+/#include <QPainter>/ a \
+#include <QPainterPath>
+'  -i editor/tree/treeitemdelegate.cpp
 }
 
 src_configure() {
