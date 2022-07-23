@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -32,7 +32,7 @@ DEPEND="${PYTHON_DEPS}
 	media-sound/csound[double-precision=]
 	dev-qt/qtgui:5"
 RDEPEND="${DEPEND}
-	pythonqt? ( $(python_gen_cond_dep ~dev-python/PythonQt-${MYPY_PV}'[${PYTHON_MULTI_USEDEP}]') )
+	pythonqt? ( $(python_gen_cond_dep ~dev-python/PythonQt-${MYPY_PV}'[${PYTHON_USEDEP}]') )
 	manual? ( || ( >=media-sound/csound-6.09.1[doc] app-doc/csound-manual[html] ) )
 	graph? ( media-gfx/graphviz )"
 

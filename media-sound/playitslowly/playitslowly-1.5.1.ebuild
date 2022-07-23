@@ -1,9 +1,9 @@
-# Copyright 1999-2018, 2020, 2021 Gentoo Foundation
+# Copyright 1999-2018, 2020, 2021, 2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
 
-PYTHON_COMPAT=( python3_{6,7,8,9} )
+PYTHON_COMPAT=( python3_{6,7,8,9,10} )
 inherit distutils-r1
 
 DESCRIPTION="An application to play back audio files at a different speed or pitch"

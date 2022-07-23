@@ -1,13 +1,13 @@
-# Copyright 1999-2019, 2021 Gentoo Authors
+# Copyright 1999-2019, 2021, 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 # PYTHON_COMPAT=( python2_7 )
-inherit cmake-utils toolchain-funcs flag-o-matic versionator gnome2-utils xdg-utils git-r3
+inherit cmake-utils toolchain-funcs flag-o-matic gnome2-utils xdg-utils git-r3
 # python-single-r1
 
 
-MY_PV=$(replace_all_version_separators _ ${PV})
+MY_PV=$(ver_rs 1- _)
 
 DESCRIPTION="The Linux (midi) MUSic Editor (a sequencer)"
 HOMEPAGE="http://www.muse-sequencer.org/"

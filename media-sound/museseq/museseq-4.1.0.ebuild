@@ -1,4 +1,4 @@
-# Copyright 1999-2018, 2022 Gentoo Foundation
+# Copyright 1999-2020, 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,16 +7,16 @@ inherit cmake-utils toolchain-funcs flag-o-matic gnome2-utils xdg-utils
 # python-single-r1
 
 
-MY_PV=$(ver_rs 1- _)
+MY_PV=$(ver_cut 1-2)
 
 DESCRIPTION="The Linux (midi) MUSic Editor (a sequencer)"
 HOMEPAGE="http://www.muse-sequencer.org/"
-SRC_URI="https://github.com/muse-sequencer/muse/archive/muse_${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/muse-sequencer/muse/releases/download/${PV}/muse-${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="1"
 KEYWORDS="~amd64"
-IUSE="+alsa dssi experimental fluidsynth instpatch lash lv2 osc python rtaudio vst vst doc"
+IUSE="+alsa dssi fluidsynth instpatch lash ladspa lv2 midiname osc python rtaudio rubberband vst vst doc"
 REQUIRED_USE=""
 
 CDEPEND="alsa? ( >=media-libs/alsa-lib-0.9.0 )
@@ -34,7 +34,8 @@ CDEPEND="alsa? ( >=media-libs/alsa-lib-0.9.0 )
 	python? ( dev-lang/python:2.7 )
 	lv2? ( media-libs/lv2  dev-libs/sord media-libs/lilv )
 	lash? ( >=media-sound/lash-0.4.0 )
-	osc? ( >=media-libs/liblo-0.23 )"
+	osc? ( >=media-libs/liblo-0.23 )
+	media-libs/ladspa-sdk"
 RDEPEND="${CDEPEND}
 	fluidsynth? ( >=media-sound/fluidsynth-0.9.0 )"
 DEPEND="${CDEPEND}
@@ -43,27 +44,29 @@ DEPEND="${CDEPEND}
 		   app-doc/doxygen
 		   media-gfx/graphviz )"
 
-S=${WORKDIR}/muse-muse_${MY_PV}/muse3
+S=${WORKDIR}/muse-${MY_PV}
 
 RESTRICT="mirror"
 
-PATCHES=("${FILESDIR}"/add-PREFIX-to-LIBDIR.patch)
+# PATCHES=("${FILESDIR}"/add-PREFIX-to-LIBDIR.patch)
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_enable alsa ALSA)
-		$(cmake-utils_use_enable dssi DSSI)
-		$(cmake-utils_use_enable experimental EXPERIMENTAL)
-		$(cmake-utils_use_enable fluidsynth FLUID)
-		$(cmake-utils_use_enable instpatch INSTPATCH)
-		$(cmake-utils_use_enable lash LASH)
-		$(cmake-utils_use_enable lv2 LV2)
-		$(cmake-utils_use_enable lv2 LV2_GTK2)
-		$(cmake-utils_use_enable osc OSC)
-		$(cmake-utils_use_enable python PYTHON)
-		$(cmake-utils_use_enable rtaudio RTAUDIO)
-		$(cmake-utils_use_enable vst VST_NATIVE)
-		$(cmake-utils_use_enable vst VST_VESTIGE)
+		-DENABLE_ALSA=$(usex alsa)
+		-DENABLE_DSSI=$(usex dssi)
+		-DENABLE_FLUID=$(usex fluidsynth)
+		-DENABLE_INSTPATCH=$(usex instpatch)
+		-DENABLE_MIDNAM=$(usex midiname)
+		-DENABLE_LASH=$(usex lash)
+		-DENABLE_LRDF=$(usex ladspa)
+		-DENABLE_LV2=$(usex lv2)
+		-DENABLE_LV2_GTK2=$(usex lv2)
+		-DENABLE_OSC=$(usex osc)
+		-DENABLE_PYTHON=$(usex python)
+		-DENABLE_RTAUDIO=$(usex rtaudio)
+		-DENABLE_RUBBERBAND=$(usex rubberband)
+		-DENABLE_VST_NATIVE=$(usex vst)
+		-DENABLE_VST_VESTIGE=$(usex vst)
 	)
 	cmake-utils_src_configure
 }

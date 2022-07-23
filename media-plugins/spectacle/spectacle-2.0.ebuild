@@ -6,7 +6,7 @@ EAPI=7
 inherit git-r3
 
 DESCRIPTION="a graphical spectral analyzer for lv2"
-HOMEPAGE=""
+HOMEPAGE="https://github.com/jpcima/spectacle"
 SRC_URI=""
 
 EGIT_REPO_URI="https://github.com/jpcima/spectacle.git"
