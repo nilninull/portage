@@ -1,9 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2016, 2022 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit cmake-utils xdg
+inherit cmake xdg
 
 DESCRIPTION="Petri-Foo is a fork of the Specimen sampler project"
 HOMEPAGE="http://petri-foo.sourceforge.net/"

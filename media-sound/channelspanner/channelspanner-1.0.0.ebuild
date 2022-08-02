@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="This VST2 Plugin aims to be a quick, light, and no-fuss multi-track Spectrum Analyzer."
 HOMEPAGE="https://github.com/cameronleger/channelspanner/"

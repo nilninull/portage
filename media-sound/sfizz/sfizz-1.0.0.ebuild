@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit git-r3 cmake-utils
+inherit git-r3 cmake
 
 DESCRIPTION="SFZ parser and synth c++ library, providing LV2 / VST3 plugins and JACK standalone client"
 HOMEPAGE="https://sfz.tools/sfizz/"
@@ -35,5 +35,5 @@ src_configure() {
 		-DSFIZZ_VST=$(usex vst)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

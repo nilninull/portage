@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2019, 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="a collection of open-source LV2 plugins"
 HOMEPAGE="http://ssj71.github.io/infamousPlugins/"
@@ -28,5 +28,5 @@ src_configure() {
 		-DLIBDIR=$(get_libdir)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

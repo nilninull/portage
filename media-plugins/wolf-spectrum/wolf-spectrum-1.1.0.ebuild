@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils git-r3
+inherit cmake git-r3
 
 DESCRIPTION="a spectrogram plugin. It can be built as an LV2 or VST plugin and as a standalone Jack application"
 HOMEPAGE="https://github.com/wolf-plugins/wolf-spectrum"

@@ -3,7 +3,7 @@
 
 EAPI=7
 # PYTHON_COMPAT=( python2_7 )
-inherit cmake-utils toolchain-funcs flag-o-matic gnome2-utils xdg-utils
+inherit cmake toolchain-funcs flag-o-matic gnome2-utils xdg-utils
 # python-single-r1
 
 
@@ -68,7 +68,7 @@ src_configure() {
 		-DENABLE_VST_NATIVE=$(usex vst)
 		-DENABLE_VST_VESTIGE=$(usex vst)
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 pkg_postinst() {

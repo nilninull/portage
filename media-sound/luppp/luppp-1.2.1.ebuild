@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils meson gnome2-utils
+inherit cmake meson gnome2-utils
 
 DESCRIPTION="Luppp is a music creation tool, intended for live use. The focus is on real time processing and a fast intuitive workflow. With extensive MIDI mapping support, you can get looping just how you like!"
 HOMEPAGE="http://openavproductions.com/luppp https://github.com/harryhaaren/openAV-Luppp"

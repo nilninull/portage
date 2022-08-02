@@ -3,7 +3,7 @@
 
 EAPI=7
 # PYTHON_COMPAT=( python2_7 )
-inherit cmake-utils toolchain-funcs flag-o-matic gnome2-utils xdg-utils git-r3
+inherit cmake toolchain-funcs flag-o-matic gnome2-utils xdg-utils git-r3
 # python-single-r1
 
 
@@ -52,21 +52,21 @@ PATCHES=("${FILESDIR}"/add-PREFIX-to-LIBDIR.patch)
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_enable alsa ALSA)
-		$(cmake-utils_use_enable dssi DSSI)
-		$(cmake-utils_use_enable experimental EXPERIMENTAL)
-		$(cmake-utils_use_enable fluidsynth FLUID)
-		$(cmake-utils_use_enable instpatch INSTPATCH)
-		$(cmake-utils_use_enable lash LASH)
-		$(cmake-utils_use_enable lv2 LV2)
-		$(cmake-utils_use_enable lv2 LV2_GTK2)
-		$(cmake-utils_use_enable osc OSC)
-		$(cmake-utils_use_enable python PYTHON)
-		$(cmake-utils_use_enable rtaudio RTAUDIO)
-		$(cmake-utils_use_enable vst VST_NATIVE)
-		$(cmake-utils_use_enable vst VST_VESTIGE)
+		-DENABLE_ALSA=$(usex alsa)
+		-DENABLE_DSSI=$(usex dssi)
+		-DENABLE_EXPERIMENTAL=$(usex experimental)
+		-DENABLE_FLUID=$(usex fluidsynth)
+		-DENABLE_INSTPATCH=$(usex instpatch)
+		-DENABLE_LASH=$(usex lash)
+		-DENABLE_LV2=$(usex lv2)
+		-DENABLE_LV2_GTK2=$(usex lv2)
+		-DENABLE_OSC=$(usex osc)
+		-DENABLE_PYTHON=$(usex python)
+		-DENABLE_RTAUDIO=$(usex rtaudio)
+		-DENABLE_VST_NATIVE=$(usex vst)
+		-DENABLE_VST_VESTIGE=$(usex vst)
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 pkg_postinst() {
