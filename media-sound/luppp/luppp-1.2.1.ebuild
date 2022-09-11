@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake meson gnome2-utils
+inherit cmake meson xdg-utils
 
 DESCRIPTION="Luppp is a music creation tool, intended for live use. The focus is on real time processing and a fast intuitive workflow. With extensive MIDI mapping support, you can get looping just how you like!"
 HOMEPAGE="http://openavproductions.com/luppp https://github.com/harryhaaren/openAV-Luppp"
@@ -23,28 +23,15 @@ DEPEND="virtual/jack
 
 S=${WORKDIR}/openAV-Luppp-release-${PV}
 
-src_install() {
-	meson_src_install
-
-	dobin ${BUILD_DIR}/luppp
-
-	insinto /usr/share/applications
-	doins resources/metadata/luppp.desktop
-
-	insinto /usr/share/appdata
-	doins resources/metadata/luppp.appdata.xml
-
-	insinto /usr/share/icons/hicolor/scalable/apps
-	doins resources/icons/luppp.svg
-
-	insinto /usr/share/icons/hicolor/128x128/apps
-	doins resources/icons/luppp.png
+src_prepare() {
+	default
+	sed 's%share/appdata%share/metainfo%' -i meson.build || die
 }
 
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }

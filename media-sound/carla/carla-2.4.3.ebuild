@@ -37,6 +37,7 @@ RDEPEND=${DEPEND}
 S=${WORKDIR}/Carla-${PV/_/-}
 
 src_prepare() {
+	sed 's%share/appdata%share/metainfo%' -i Makefile || die
 	make features
 	default
 }
