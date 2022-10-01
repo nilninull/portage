@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -37,8 +37,13 @@ RDEPEND=${DEPEND}
 S=${WORKDIR}/Carla-${PV/_/-}
 
 src_prepare() {
-	make features
+	sed 's%share/appdata%share/metainfo%' -i Makefile || die
+	emake features
 	default
+}
+
+src_compile() {
+	emake SKIP_STRIPPING=true
 }
 
 src_install() {

@@ -1,4 +1,4 @@
-# Copyright 2020, 2021 Gentoo Authors
+# Copyright 2020, 2021, 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -25,6 +25,10 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 EGIT_REPO_URI="https://github.com/michaelwillis/dragonfly-reverb.git"
 EGIT_COMMIT="${PV}"
+
+src_compile() {
+	emake SKIP_STRIPPING=true
+}
 
 src_install() {
 	insinto /usr/$(get_libdir)/lv2
