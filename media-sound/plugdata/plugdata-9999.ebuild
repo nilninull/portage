@@ -1,4 +1,4 @@
-# Copyright 2022 Gentoo Authors
+# Copyright 2022-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -50,7 +50,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_install() {
-	dobin Plugins/Standalone/PlugData
+	dobin Plugins/Standalone/plugdata
 
 	insinto /usr/lib64/lv2
 	doins -r Plugins/LV2/*
@@ -58,9 +58,12 @@ src_install() {
 	insinto /usr/lib64/vst3
 	doins -r Plugins/VST3/*
 
+	insinto /usr/lib64/clap
+	doins -r Plugins/CLAP/*
+
 	dodoc CODE_OF_CONDUCT.md LICENSE README.md
 
-	newicon Resources/plugd_logo.png plugdata.png
+	newicon Resources/Icons/plugdata_logo.png plugdata.png
 
-	make_desktop_entry PlugData PlugData plugdata
+	make_desktop_entry plugdata PlugData plugdata
 }
