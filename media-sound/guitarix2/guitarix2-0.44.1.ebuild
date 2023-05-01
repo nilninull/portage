@@ -5,7 +5,7 @@ EAPI="7"
 
 [[ "${PV}" = "9999" ]] && inherit git-r3
 
-PYTHON_COMPAT=( python3_{8..12} )
+PYTHON_COMPAT=( python3_{8..11} )
 PYTHON_REQ_USE=( 'threads(+)' )
 
 inherit waf-utils python-any-r1
