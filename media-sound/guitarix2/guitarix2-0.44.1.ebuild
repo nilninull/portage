@@ -60,7 +60,7 @@ DOCS=( changelog README )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.41.0-nostrip.patch
-	# "${FILESDIR}"/${P}-fix-build-with-glib-2.68.patch
+	"${FILESDIR}"/${PN}-0.41.0-py3.11.patch
 )
 
 # CC="clang"
