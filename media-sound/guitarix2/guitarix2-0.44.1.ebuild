@@ -80,8 +80,9 @@ src_configure() {
 		$(usex debug --debug "")
 		$(usex faust --faust --no-faust)
 		$(usex faust --faust-float "")
-		$(usex ladspa --ladspadir="${EPREFIX}"/usr/share/ladspa "--no-ladspa --no-new-ladspa")
-		$(usex lv2 --lv2dir="${EPREFIX}"/usr/$(get_libdir)/lv2 --no-lv2)
+		$(usex ladspa --new-ladspa --no-new-ladspa)
+		$(usex ladspa --ladspadir="${EPREFIX}/usr/$(get_libdir)/ladspa" "--no-ladspa --no-new-ladspa")
+		$(usex lv2 --lv2dir="${EPREFIX}/usr/$(get_libdir)/lv2" --no-lv2)
 		$(usex lv2 --mod-lv2)
 		$(usex roboto-font --install-roboto-font "")
 
