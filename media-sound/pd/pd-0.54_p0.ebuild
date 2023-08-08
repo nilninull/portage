@@ -4,7 +4,7 @@
 EAPI=8
 
 # inherit autotools eutils
-inherit desktop xdg autotools
+inherit xdg autotools
 
 MY_P=${P/_p/-}
 
@@ -59,7 +59,4 @@ src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed."
 
 	find ${D} -name '*.la' -delete || die
-
-	doicon tcl/pd.xpm
-	make_desktop_entry "${PN} -rt" "PureData" "${PN}" "AudioVideo;Audio"
 }
