@@ -3,7 +3,6 @@
 
 EAPI=8
 
-# inherit autotools eutils
 inherit xdg autotools
 
 MY_P=${P/_p/-}

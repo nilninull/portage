@@ -3,7 +3,6 @@
 
 EAPI=7
 
-# inherit autotools eutils
 inherit desktop autotools
 
 MY_P=${P/_p/-}
