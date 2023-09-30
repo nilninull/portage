@@ -1,4 +1,4 @@
-# Copyright 2021, 2022 Gentoo Authors
+# Copyright 2021-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -32,7 +32,7 @@ multilib_src_compile() {
 
 multilib_src_install() {
 	insinto /usr/$(get_libdir)/wineasio
-	doins build${MULTILIB_ABI_FLAG#abi_x86_}/wineasio.dll.so
+	doins build${MULTILIB_ABI_FLAG#abi_x86_}/wineasio.dll{,.so}
 }
 
 multilib_src_install_all() {
@@ -40,7 +40,7 @@ multilib_src_install_all() {
 }
 
 pkg_postinst() {
-	wineasio-setup -l
+	wineasio-setup -L
 
 	elog 'Finally the dll must be registered in the wineprefix. For both 32 and 64-bit wine do:'
 	elog

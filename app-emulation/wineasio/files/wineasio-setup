@@ -1,40 +1,70 @@
 #! /bin/bash
 
-DLL_FILE=wineasio.dll.so
+DLL_FILE=wineasio.dll
 
 make_wineasio_link() {
-    local BIT=$1
+	local BIT=$1
     local WVER=$2
 
-    if [[ -d /usr/lib${BIT}/${WVER}/wine/ ]]; then
-	ln -snf /usr/lib${BIT}/wineasio/${DLL_FILE} /usr/lib${BIT}/${WVER}/wine/
+	if [ "${BIT}" == 64 ]; then
+		local ARCH=x86_64
+	else
+		local ARCH=i386
+	fi
+
+    if [[ -d /usr/lib/${WVER}/wine/ ]]; then
+		ln -snfv /usr/lib${BIT}/wineasio/${DLL_FILE} /usr/lib/${WVER}/wine/${ARCH}-windows/
+		ln -snfv /usr/lib${BIT}/wineasio/${DLL_FILE}.so /usr/lib/${WVER}/wine/${ARCH}-unix/
     fi
 }
 
 make_links() {
+	echo Make symbolic links
     for wver in $(eselect --brief wine list); do
-	make_wineasio_link 64 ${wver}
-	make_wineasio_link '' ${wver}
+		make_wineasio_link 64 ${wver}
+		make_wineasio_link '' ${wver}
     done
+}
+
+show_message() {
+	echo '
+Finally the dll must be registered in the wineprefix. For both 32 and 64-bit wine do:
+
+$ regsvr32 wineasio.dll
+
+On a 64-bit system with wine supporting both 32 and 64-bit applications,
+regsrv32 will register the 32-bit driver in a 64-bit prefix, use the
+following command to register the 64-bit driver in a 64-bit wineprefix:
+
+$ wine64 regsvr32 wineasio.dll
+
+regsvr32 registers the ASIO COM object in the default prefix ~/.wine.
+To use another prefix specify it explicitly, like:
+
+$ env WINEPREFIX=~/asioapp regsvr32 wineasio.dll
+'
 }
 
 remove_links() {
     shopt -s  nullglob
 
-    for dll_file in /usr/lib{,64}/wine-*/wine/${DLL_FILE}; do
-	rm -f ${dll_file}
+    for lnk in /usr/lib/wine-*/wine/*/${DLL_FILE}*; do
+		rm -vf ${lnk}
     done
 }
 
 show_links() {
     shopt -s  nullglob
 
-    for lnk in /usr/lib{,64}/wine-*/wine/${DLL_FILE}; do
-	ls -l $lnk
+    for lnk in /usr/lib/wine-*/wine/*/${DLL_FILE}*; do
+		ls -l $lnk
     done
 }
 
 if [[ x$1 == x-l ]]; then
+	make_links
+	show_message
+elif [[ x$1 == x-L ]]; then
     make_links
 elif [[ x$1 == x-r ]]; then
     remove_links
