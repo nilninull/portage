@@ -1,0 +1,25 @@
+#! /bin/bash
+
+if [ x$1 == x-r ]; then
+	export WINEPREFIX
+
+	if [ -e "${WINEPREFIX:=${HOME}/.wine}" -a ! -e ${WINEPREFIX}/drive_c/windows/system32/wineasio64.dll ]; then
+		wineboot -u
+	fi
+
+	regsvr32 wineasio32.dll
+
+	if command -v wine64 > /dev/null && [ -d "${WINEPREFIX}/drive_c/windows/syswow64" ]; then
+		wine64 regsvr32 wineasio64.dll
+	fi
+else
+    cat <<-EOF
+	$(basename ${0}) [-r]
+	-r : run register commands to current WINEPREFIX
+
+	Please make sure your wine has wineasio symbolic links to wineasio dlls.
+	You can view the current link status with the following command
+
+	$ wineasio-setup -s
+EOF
+fi
