@@ -43,6 +43,7 @@ remove_links() {
 
     for lnk in /usr/lib/wine-*/wine/*/wineasio*.dll*; do
 		rm -vf ${lnk}
+		rmdir -pv --ignore-fail-on-non-empty "`dirname ${lnk}`"
     done
 }
 
@@ -50,7 +51,7 @@ show_links() {
     shopt -s  nullglob
 
     for lnk in /usr/lib/wine-*/wine/*/wineasio*.dll*; do
-		ls -l $lnk
+		ls -l ${lnk}
     done
 }
 
