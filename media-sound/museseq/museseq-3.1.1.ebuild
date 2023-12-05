@@ -1,4 +1,4 @@
-# Copyright 1999-2020, 2022 Gentoo Authors
+# Copyright 1999-2020, 2022, 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,11 +6,10 @@ EAPI=7
 inherit cmake toolchain-funcs flag-o-matic gnome2-utils xdg-utils
 # python-single-r1
 
-
 MY_PV=$(ver_rs 1- _)
 
 DESCRIPTION="The Linux (midi) MUSic Editor (a sequencer)"
-HOMEPAGE="http://www.muse-sequencer.org/"
+HOMEPAGE="https://muse-sequencer.github.io"
 SRC_URI="https://github.com/muse-sequencer/muse/archive/muse_${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"

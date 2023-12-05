@@ -1,17 +1,13 @@
-# Copyright 1999-2019, 2021, 2022 Gentoo Authors
+# Copyright 1999-2019, 2021, 2022, 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-# PYTHON_COMPAT=( python2_7 )
-inherit cmake toolchain-funcs flag-o-matic gnome2-utils xdg-utils git-r3
-# python-single-r1
-
+EAPI=8
+inherit cmake toolchain-funcs flag-o-matic xdg-utils git-r3
 
 MY_PV=$(ver_rs 1- _)
 
 DESCRIPTION="The Linux (midi) MUSic Editor (a sequencer)"
-HOMEPAGE="http://www.muse-sequencer.org/"
-# SRC_URI="https://github.com/muse-sequencer/muse/archive/muse_${MY_PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://muse-sequencer.github.io"
 EGIT_REPO_URI="https://github.com/muse-sequencer/muse.git"
 
 LICENSE="GPL-2"
@@ -65,6 +61,8 @@ src_configure() {
 		-DENABLE_RTAUDIO=$(usex rtaudio)
 		-DENABLE_VST_NATIVE=$(usex vst)
 		-DENABLE_VST_VESTIGE=$(usex vst)
+
+		-DLIB_INSTALL_DIR=/usr/$(get_libdir)
 	)
 	cmake_src_configure
 }
@@ -72,11 +70,11 @@ src_configure() {
 pkg_postinst() {
 	xdg_desktop_database_update
 	xdg_mimeinfo_database_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
 	xdg_desktop_database_update
 	xdg_mimeinfo_database_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
