@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit cmake toolchain-funcs flag-o-matic xdg-utils git-r3
+
+PYTHON_COMPAT=( python3_{9..12} )
+
+inherit cmake toolchain-funcs flag-o-matic xdg-utils git-r3 python-single-r1
 
 MY_PV=$(ver_rs 1- _)
 
@@ -28,7 +31,7 @@ CDEPEND="alsa? ( >=media-libs/alsa-lib-0.9.0 )
 	rtaudio? ( media-libs/rtaudio )
 	instpatch? ( dev-libs/libinstpatch )
 	dssi? ( >=media-libs/dssi-0.9.0 )
-	python? ( dev-lang/python:2.7 )
+	python? ( ${PYTHON_DEPS} )
 	lv2? ( media-libs/lv2  dev-libs/sord media-libs/lilv )
 	lash? ( >=media-sound/lash-0.4.0 )
 	osc? ( >=media-libs/liblo-0.23 )"
