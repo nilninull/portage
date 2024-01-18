@@ -20,4 +20,4 @@ SLOT="0"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
-BDEPEND=">=dev-util/cmake-3.12"
+BDEPEND=">=dev-build/cmake-3.12"

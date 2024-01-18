@@ -19,7 +19,7 @@ S=${WORKDIR}/${PN}-${MY_PV}
 RDEPEND="sys-devel/bison
 	sys-devel/flex"
 DEPEND="sys-apps/sed
-	doc? ( app-doc/doxygen )"
+	doc? ( app-text/doxygen )"
 
 # src_prepare() {
 # 	default

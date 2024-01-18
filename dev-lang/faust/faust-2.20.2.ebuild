@@ -19,7 +19,7 @@ SRC_URI="https://github.com/grame-cncm/faust/archive/${PV}.tar.gz -> ${P}.tar.gz
 RDEPEND="sys-devel/bison
 	sys-devel/flex"
 DEPEND="sys-apps/sed
-	doc? ( app-doc/doxygen )"
+	doc? ( app-text/doxygen )"
 PDEPEND="dev-libs/faustlibraries"
 
 # src_prepare() {

@@ -19,7 +19,7 @@ SRC_URI="mirror://sourceforge/faudiostream/${P}.zip"
 RDEPEND="sys-devel/bison
 	sys-devel/flex"
 DEPEND="sys-apps/sed
-	doc? ( app-doc/doxygen )"
+	doc? ( app-text/doxygen )"
 
 src_compile() {
 	PREFIX=/usr emake

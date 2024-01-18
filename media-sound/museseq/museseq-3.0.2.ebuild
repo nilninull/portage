@@ -39,7 +39,7 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
 	doc? ( app-text/openjade
-		   app-doc/doxygen
+		   app-text/doxygen
 		   media-gfx/graphviz )"
 
 S=${WORKDIR}/muse-muse_${MY_PV}/muse3

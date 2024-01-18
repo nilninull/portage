@@ -22,5 +22,5 @@ SLOT="0"
 DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND="
-	>=dev-util/meson-0.55.0
+	>=dev-build/meson-0.55.0
 "
